@@ -1,4 +1,4 @@
-import { publicProcedure, router } from "@/server/trpc"
+import { publicProcedure, router } from "@/server/trpc-server"
 
 export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
