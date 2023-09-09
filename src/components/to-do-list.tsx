@@ -9,6 +9,11 @@ export default function ToDoList() {
       refetch();
     },
   });
+  const { mutate: setDone } = trpc.setDone.useMutation({
+    onSettled: () => {
+      refetch();
+    },
+  });
 
   const [content, setContent] = useState("");
 
@@ -23,13 +28,13 @@ export default function ToDoList() {
               id={`check-${todo.id}`}
               type="checkbox"
               checked={!!todo.done}
-              style={{ zoom: 1.5 }}
-              // onChange={async () => {
-              //   setDone.mutate({
-              //     id: todo.id,
-              //     done: todo.done ? 0 : 1,
-              //   });
-              // }}
+              className="scale-150"
+              onChange={async () => {
+                setDone({
+                  id: todo.id,
+                  done: todo.done ? 0 : 1,
+                });
+              }}
             />
             <label htmlFor={`check-${todo.id}`}>{todo.content}</label>
           </div>
